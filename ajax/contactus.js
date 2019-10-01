@@ -2,10 +2,10 @@
 //jQuery(document).ready(function($){
     jQuery(function($){
 
-        if( $('body').hasClass('single-post') ){
+        //if( $('body').hasClass('single-post') ){
     
        
-    
+    /*
         // validate Comment form on keyup and submit
         jQuery("#contact").validate({
             rules: {
@@ -20,9 +20,13 @@
                 name: "Please type your first name",
                 email: "Please type a valid email address",
                 message: "Please type message"
-            }
+            },
+            submitHandler: function(form) {
+                // do other things for a valid form
+                form.submit();
+              }
         });
-        
+        */
     
         // jQuery('#comment_form_submit_btn').click(function(){
         //     //event.preventDefault();
@@ -46,18 +50,18 @@
         //     }
         // });
     
-        if($("#contact").valid() != false){
+        //if($("#contact").valid() != false){
             $("#contact").submit(function(e){
             e.preventDefault();
             
-        
+        //function Form_Submission(){
     
     
             var ContactFormRequestData = new FormData();
                 ContactFormRequestData.append('action'    , 'contact_us_request_handler');
                 ContactFormRequestData.append('NAME'	 , $('#name').val());
                 ContactFormRequestData.append('EMAIL'	, $('#email').val());
-                ContactFormRequestData.append('WEBSITE'	, $('#message').val());
+                ContactFormRequestData.append('MESSAGE'	, $('#message').val());
                 
     
             $.ajax({
@@ -90,11 +94,13 @@
             
             });
     
+        //}
+
         });
-    }    
+    //}    
         
     
     
-        }    
+       // }    
     
     });

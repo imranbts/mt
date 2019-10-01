@@ -10,23 +10,21 @@ function contact_us_request_handler(){
     global $wpdb;
 
     //var_dump($_POST);
-    
-    $NAME = $_POST['name'];
-    $EMAIL = $_POST['email'];
-    $MESSAGE = $_POST['message'];
+    //die();
 
 
     $data = array(
-        'Name' => $NAME,
-        'Email' => $EMAIL,
-        'Message' => $MESSAGE,
+        'Name' => $_POST['NAME'],
+        'Email' => $_POST['EMAIL'],
+        'Message' => $_POST['MESSAGE'],
     );
 
-    $result = $wpdb->insert( $wpdb->wp_form, $data);
+    $wpdb->insert('wp_form',$data);
+    //$result = $wpdb->insert( $wpdb->wp_form, $data);
     //echo $comment_id;
+    $Inser_Query_ID = $wpdb->insert_id;
 
-
-    if( !empty($result )){
+    if( !empty($Inser_Query_ID)){
 			
         $final_response_code = 1;
         $final_response_header = 'Success!';
