@@ -101,7 +101,7 @@ function awesome_custom_post_type (){
 		'query_var' => true,
 		'rewrite' => true,
 		'capability_type' => 'post',
-		'hierarchical' => false,
+		'hierarchical' => true,
 		'supports' => array(
 			'title',
 			'editor',
@@ -116,3 +116,33 @@ function awesome_custom_post_type (){
 	register_post_type('portfolio',$args);
 }
 add_action('init','awesome_custom_post_type');
+
+
+// Custom Taxonomy
+function awesome_custom_register_taxonomy() {
+
+	$labels = array(
+		  'name'              => __( 'Services'),
+		  'singular_name'     => __( 'Service'),
+		  'search_items'      => __( 'Search Services'),
+		  'all_items'         => __( 'All Services'),
+		  'edit_item'         => __( 'Edit Services'),
+		  'update_item'       => __( 'Update Services'),
+		  'add_new_item'      => __( 'Add New Service'),
+		  'new_item_name'     => __( 'New Service Name'),
+		  'menu_name'         => __( 'Services'),
+	  );
+	  
+	  $args = array(
+		  'labels' => $labels,
+		  'hierarchical' => true,
+		  'sort' => true,
+		  'args' => array( 'orderby' => 'term_order' ),
+		  'rewrite' => array( 'slug' => 'services' ),
+		  'show_admin_column' => true
+	  );
+	  
+	  register_taxonomy( 'service', array( 'post', 'portfolio' ), $args);
+	  
+  }
+  add_action( 'init', 'awesome_custom_register_taxonomy' );
