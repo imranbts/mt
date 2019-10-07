@@ -72,48 +72,47 @@ function footer_col_2_widgets_init() {
 add_action( 'widgets_init', 'footer_col_2_widgets_init' );
 
 
-
-
-// Custom Post Type Here
-add_action( 'init', 'codex_book_init' );
-/**
- * Register a book post type.
- *
- * @link http://codex.wordpress.org/Function_Reference/register_post_type
- */
-function codex_book_init() {
+/*
+	==========================================
+	 Custom Post Type
+	==========================================
+*/
+function awesome_custom_post_type (){
+	
 	$labels = array(
-		'name'               => _x( 'Books', 'post type general name', 'your-plugin-textdomain' ),
-		'singular_name'      => _x( 'Book', 'post type singular name', 'your-plugin-textdomain' ),
-		'menu_name'          => _x( 'Books', 'admin menu', 'your-plugin-textdomain' ),
-		'name_admin_bar'     => _x( 'Book', 'add new on admin bar', 'your-plugin-textdomain' ),
-		'add_new'            => _x( 'Add New', 'book', 'your-plugin-textdomain' ),
-		'add_new_item'       => __( 'Add New Book', 'your-plugin-textdomain' ),
-		'new_item'           => __( 'New Book', 'your-plugin-textdomain' ),
-		'edit_item'          => __( 'Edit Book', 'your-plugin-textdomain' ),
-		'view_item'          => __( 'View Book', 'your-plugin-textdomain' ),
-		'all_items'          => __( 'All Books', 'your-plugin-textdomain' ),
-		'search_items'       => __( 'Search Books', 'your-plugin-textdomain' ),
-		'parent_item_colon'  => __( 'Parent Books:', 'your-plugin-textdomain' ),
-		'not_found'          => __( 'No books found.', 'your-plugin-textdomain' ),
-		'not_found_in_trash' => __( 'No books found in Trash.', 'your-plugin-textdomain' )
+		'name' => 'Portfolio',
+		'singular_name' => 'Portfolio',
+		'add_new' => 'Add Item',
+		'all_items' => 'All Items',
+		'add_new_item' => 'Add Item',
+		'edit_item' => 'Edit Item',
+		'new_item' => 'New Item',
+		'view_item' => 'View Item',
+		'search_item' => 'Search Portfolio',
+		'not_found' => 'No items found',
+		'not_found_in_trash' => 'No items found in trash',
+		'parent_item_colon' => 'Parent Item'
 	);
-
 	$args = array(
-		'labels'             => $labels,
-		'description'        => __( 'Description.', 'your-plugin-textdomain' ),
-		'public'             => true,
+		'labels' => $labels,
+		'public' => true,
+		'has_archive' => true,
 		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_menu'       => true,
-		'query_var'          => true,
-		'rewrite'            => array( 'slug' => 'book' ),
-		'capability_type'    => 'post',
-		'has_archive'        => true,
-		'hierarchical'       => false,
-		'menu_position'      => null,
-		'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'comments' )
+		'query_var' => true,
+		'rewrite' => true,
+		'capability_type' => 'post',
+		'hierarchical' => false,
+		'supports' => array(
+			'title',
+			'editor',
+			'excerpt',
+			'thumbnail',
+			'revisions',
+		),
+		'taxonomies' => array('category', 'post_tag'),
+		'menu_position' => 5,
+		'exclude_from_search' => false
 	);
-
-	register_post_type( 'book', $args );
+	register_post_type('portfolio',$args);
 }
+add_action('init','awesome_custom_post_type');
